@@ -1,7 +1,9 @@
 // config.js
 
 // Read environment from global var or default to "dev"
-const ENV = window.env || "dev";
+// const ENV = window.env || "dev";
+
+const ENV = window.env || "prod";
 
 // Define environment-specific configs
 const CONFIG = {
