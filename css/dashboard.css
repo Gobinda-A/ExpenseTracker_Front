@@ -582,7 +582,8 @@
       }
 
       .container {
-        max-width: 100%;
+        max-width:200%;
+        width: 106%;
       }
 
       /* Display Hide-Show part */
