@@ -1,8 +1,7 @@
-//const BASE_URL= "http://192.168.1.3:8080/api/user";
-const BASE_URL = "http://localhost:8080/api/user";
+// const BASE_URL = "http://localhost:8080/api";
 // Function to create a user
 export async function createUser(user){
-const response=  await fetch(`${BASE_URL}/create`, {
+const response=  await fetch(`${BASE_URL}/user/create`, {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
@@ -17,7 +16,7 @@ return response.json();
 
 // Function to get a user-login
 export async function getUser(user){
-const response=await fetch(`${BASE_URL}/get`, {
+const response=await fetch(`${BASE_URL}/user/get`, {
     method: "POST",
     headers: { "Content-Type": "application/json"},
     credentials: "include", // ✅ Important: send cookies
@@ -31,7 +30,7 @@ return response.json();
 
 //get current user
 export async function getCurrUser(){
-const response=await fetch(`${BASE_URL}/me`, {
+const response=await fetch(`${BASE_URL}/user/me`, {
     method: "GET",
     credentials: "include" // ✅ Important: send cookies
 });
@@ -43,7 +42,7 @@ return user;
 
 //log out user
 export async function logOut() {
-const response = await fetch(`${BASE_URL}/logout`, {
+const response = await fetch(`${BASE_URL}/user/logout`, {
     method: "POST",
     credentials: "include" // ✅ Important: send cookies        
 });
@@ -52,7 +51,7 @@ if (!response.ok)
 }
 
 export async function addBalance(data) {
-const response = await fetch(`${BASE_URL}/addBalance`, {
+const response = await fetch(`${BASE_URL}/user/addBalance`, {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
