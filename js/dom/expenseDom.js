@@ -97,7 +97,7 @@ export async function renderExpenseRow({
     description,
     amount,
   }); // Save Expense to DB
-
+  await updateBalance(amount); //Deduct the balance
   await reloadExpenseRows(); // Reload all expenses to reflect the new addition
 }
 
@@ -108,7 +108,13 @@ export async function renderBalance({ amount }) {
   setProfile(updatedUser);
   await reloadBalance();
 }
-
+async function updateBalance(amount) {
+  const user = getProfile();
+  const newBalance= (Number(user.balance)||0)-(Number(amount)||0);
+  const updatedUser=await addBalance({emailID:user.emailID, balance:newBalance});
+  setProfile(updatedUser);
+  await reloadBalance();
+}
 export async function reloadBalance() {
   const user = getProfile();
   document.getElementById("bal-amount").textContent=`₹${user.balance}`;
