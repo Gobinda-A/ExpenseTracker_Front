@@ -16,8 +16,4 @@ const CONFIG = {
 // Select config
 const BASE_URL = CONFIG[ENV].BASE_URL;
 
-// (Optional) expose to global scope for easy access
-window.BASE_URL = BASE_URL;
-window.ENV = ENV;
-
 console.log(`Running in ${ENV} mode`);
