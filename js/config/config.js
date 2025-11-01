@@ -1,9 +1,9 @@
 // config.js
 
 // Read environment from global var or default to "dev"
-const ENV = "dev";
+//const ENV = "dev";
 
-//const ENV ="prod";
+const ENV ="prod";
 
 // Define environment-specific configs
 const CONFIG = {
