@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker — Dashboard</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="profile" id="profileMenu">
+        <img src="../images/profile icon.png" alt="Profile" class="avatar" />
+        <div class="dropdown">
+          <a href="#">My Profile</a>
+          <a href="#" id="logoutBtn">Logout</a>
+        </div>
+        <div class="greeting">
+          <div class="muted" id="profileName">Guest</div>
+        </div>
+        <div class="topbar-right">
+          <div class="nav-btn" id="nav-btn-topbar">
+            <button id="prevMonth-top" class="month-btn"><img class="arrow" src="../images/left-arrow.png"></button>
+            <button id="curr-date-top" class="month-btn">20/1/2025</button>
+            <button id="nextMonth-top" class="month-btn"><img class="arrow" src="../images/right-arrow.png"></button>
+          </div>
+          <div class="topbar-stat" title="Your total spending for this month">
+            <span class="pill" id="mobile-pill">This Month</span>
+            <span class="amount" id="this-month-expense">₹100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expense Table -->
+    <div class="card-parent">
+      <div class="card">
+        <div class="card-header">
+          <div class="nav-btn" id="nav-btn-card1">
+            <button id="dashboard-stat-toggle" class="month-btn">
+              <img class="stat-img" id="stat-img" src="../images/increase.png">
+              <img class="stat-img hidden" id="dash-img" src="../images/dashboard.png">
+            </button>
+            <div class="topbar-stat" id="bal-stat">
+              <span class="bal-pill" id="bal-pill">Balance</span>
+              <span class="amount" id="bal-amount">₹100</span>
+            </div>
+          </div>
+          <button class="month-btn" id="bal-add-btn">+ Add Bal</button>
+          <div class="card-title">Recent Expenses</div>
+          <div class="nav-btn" id="nav-btn-card">
+            <button id="prevMonth-card" class="month-btn"><img class="arrow" src="../images/left-arrow.png"></button>
+            <button id="curr-date-card" class="month-btn">20/1/2025</button>
+            <button id="nextMonth-card" class="month-btn"><img class="arrow" src="../images/right-arrow.png"></button>
+            <button id="edit-btn" class="month-btn"><img class="stat-img" src="../images/compose.png"></button>
+          </div>
+          <button class="month-btn" id="expense-add-btn">+ Add Exp</button>
+        </div>
+
+        <div class="card-body" style="gap: 20px;" id="card-desktop">
+          <div class="expense-table-wrapper" style="flex: 2;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Day</th>
+                  <th>Time</th>
+                  <th>Category</th>
+                  <th>Location</th>
+                  <th>Description</th>
+                  <th style="text-align:right;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Expense rows will be dynamically added here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="expense-container" id="card-mobile">
+          <div class="expense-card">
+            <div class="expense-header">
+              <span class="expense-date">Oct 21, 2025 (Tue) • 08:35 PM</span>
+              <span class="expense-amount">₹1,250</span>
+            </div>
+            <div class="expense-body">
+              <span class="expense-location">Bangalore</span>
+              <span class="expense-category">Food & Dining</span>
+            </div>
+            <div class="expense-description">
+              Dinner at Empire restaurant with friends
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Expense-stat -->
+    <div class="expense-stats hidden" id="expense-stat-card">
+      <h2>Expense Statistics</h2>
+      <div class="totals">
+        <div class="total-box">
+          <h3>October Expenses:</h3>
+          <div class="amount" id="stat-month-amt">₹1000</div>
+        </div>
+        <div class="total-box total">
+          <h3>Total Expenses:</h3>
+          <div class="amount" id="stat-tot-amt">₹3000</div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <span class="label">Food</span>
+        <div class="bar">
+          <div class="fill" style="width: 40%; background-color: #9be564;"></div>
+        </div>
+        <span class="percent">40%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Rent</span>
+        <div class="bar">
+          <div class="fill" style="width: 20%; background-color: #64b5f6;"></div>
+        </div>
+        <span class="percent">20%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Travel</span>
+        <div class="bar">
+          <div class="fill" style="width: 10%; background-color: #ffb74d;"></div>
+        </div>
+        <span class="percent">10%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Grocery</span>
+        <div class="bar">
+          <div class="fill" style="width: 15%; background-color: #4ade80;"></div>
+        </div>
+        <span class="percent">15%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Medical</span>
+        <div class="bar">
+          <div class="fill" style="width: 8%; background-color: #f87171;"></div>
+        </div>
+        <span class="percent">8%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Electricity</span>
+        <div class="bar">
+          <div class="fill" style="width: 12%; background-color: #15f2fa;"></div>
+        </div>
+        <span class="percent">12%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">EMI</span>
+        <div class="bar">
+          <div class="fill" style="width: 24%; background-color: #f615fae6;"></div>
+        </div>
+        <span class="percent">24%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Family</span>
+        <div class="bar">
+          <div class="fill" style="width: 40%; background-color: #d8fa15;"></div>
+        </div>
+        <span class="percent">40%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Dependant</span>
+        <div class="bar">
+          <div class="fill" style="width: 15%; background-color: #cc34fbc9;"></div>
+        </div>
+        <span class="percent">15%</span>
+      </div>
+
+      <div class="stat">
+        <span class="label">Others</span>
+        <div class="bar">
+          <div class="fill" style="width: 10%; background-color: #f643d2;"></div>
+        </div>
+        <span class="percent">10%</span>
+      </div>
+    </div>
+    <!-- Balance Modal -->
+    <div id="balModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <div class="close-btn" id="closebalModal"><img src="../images/close-button.png"></div>
+        <h3>Add Balance</h3>
+        <form id="balForm">
+          <div class="form-row-container">
+            <div class="form-row">
+              <label>Amount</label>
+              <input type="number" id="balAmount" placeholder="₹0" name="amount" required>
+            </div>
+            <button type="button" class="add-btn" id="bal-add-submit">+ Add Bal</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Expense Input Container -->
+  <!-- Expense Modal -->
+
+  <div id="expenseModal" class="modal" >
+    <div class="modal-content">
+      <div class="close-btn" id="closeModal"><img src="../images/close-button.png"></div>
+      <h3>Add New Expense</h3>
+      <form id="expenseForm">
+        <div class="form-row-container">
+          <div class="form-row">
+            <label>Category</label>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>Select a category</option>
+              <option value="Grocery">Grocery</option>
+              <option value="Rent">Rent</option>
+              <option value="Electricity">Electricity</option>
+              <option value="Food" selected>Food</option>
+              <option value="Medical">Medical</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Location</label>
+            <input type="text" id="location" value="Home" name="location" required>
+          </div>
+          <div class="form-row">
+            <label>Description</label>
+            <input type="text" id="description" placeholder="Enter details" name="description" required>
+          </div>
+          <div class="form-row">
+            <label>Amount</label>
+            <input type="number" id="amount" placeholder="₹0" name="amount" required>
+          </div>
+          <button type="button" class="add-btn" id="expense-add-submit">+ Add Expense</button>
+      </form>
+    </div>
+  </div>
+  <script type="module" src="../js/app/main.js"></script>
+  
+</body>
+
+</html>

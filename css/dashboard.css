@@ -1,0 +1,883 @@
+    :root {
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --text: #111827;
+      --accent: #16a34a;
+      --accent-2: #2563eb;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: grid;
+      width: 100%;
+      gap: 16px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .greeting {
+      font-size: 20px;
+      width: 40%;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      margin-left: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .topbar-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #f3f4f6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.12);
+      border: 1px solid rgba(22, 163, 74, 0.35);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .amount {
+      font-size: 18px;
+    }
+
+    /* Profile avatar */
+    .profile {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid var(--border);
+      object-fit: cover;
+    }
+
+    .dropdown {
+      position: absolute;
+      left: 0;
+      top: 50px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+      flex-direction: column;
+      min-width: 150px;
+      z-index: 1000;
+    }
+
+    .dropdown a {
+      padding: 12px 16px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .dropdown a:hover {
+      background: #f3f4f6;
+    }
+
+    .profile.open .dropdown {
+      display: flex;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      justify-self: end;
+      justify-content: flex-end;
+    }
+
+    /* Table card */
+    .card {
+      margin-top: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      flex: 1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .btn {
+      background: var(--accent-2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: #1e4ed8;
+      transform: translateY(-0.5px);
+    }
+
+    #card-mobile {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      padding: 12px 16px;
+      background: #f9fafb;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fdfdfd;
+    }
+
+    tbody tr:hover {
+      background: #f3f4f6;
+    }
+
+    td {
+      padding: 14px 16px;
+      vertical-align: middle;
+    }
+
+    .td-amount {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-2);
+    }
+
+    /* Expense Input Card */
+
+    .expense-input-card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      max-width: 500px;
+    }
+
+    .expense-input-card h3 {
+      margin-top: 0;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-row label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #374151;
+    }
+
+    .form-row input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+    }
+
+    .form-row input:read-only {
+      background: #f9fafb;
+      color: #6b7280;
+    }
+
+    .add-btn {
+      margin-top: 10px;
+      padding: 10px 16px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .add-btn:hover {
+      background: #1d4ed8;
+    }
+
+
+    /* expense input form */
+    /* Modal Background */
+    .modal {
+      display: none; /*Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      /* display: flex; */
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    /* Modal Box */
+    .modal-content {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      width: 420px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.3s ease;
+      position: relative;
+    }
+
+    /* Close Button */
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .close-btn:hover {
+      color: #000;
+    }
+
+
+    /* Smooth popup animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Category option */
+    /* Common style for inputs and selects */
+    .form-row input,
+    .form-row select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+    }
+
+    /* On focus */
+    .form-row input:focus,
+    .form-row select:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+
+    /* Match font and spacing */
+    .form-row label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* Expense stat design */
+    .expense-stats {
+      width: 300px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      font-family: "Segoe UI", sans-serif;
+      color: #333;
+      margin-top: 18px;
+      height: fit-content;
+    }
+
+    .expense-stats h2 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      color: #222;
+      margin-top: 0px;
+    }
+
+    .expense-stats .totals {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      flex: 0 0 60px;
+    }
+
+    .bar {
+      flex: 1;
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.6s ease;
+    }
+
+    .percent {
+      width: 40px;
+      text-align: right;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .card-parent {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    /* Match October & Total Expenses section to progress bar theme */
+    .expense-stats .totals {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9fafb;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .total-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .total-box h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #222;
+      margin: 0;
+    }
+
+    .total-box .amount {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #22c55e;
+      /* green accent like "Food" bar */
+    }
+
+    .total-box.total {
+      text-align: right;
+    }
+
+    .total-box.total .amount {
+      color: #3b82f6;
+      /* blue accent to match "Rent" bar */
+    }
+
+    /* Prev & Next btn */
+    .nav-btn {
+      display: flex;
+      gap: 12px;
+    }
+
+    #nav-btn-card {
+      display: none;
+    }
+    #nav-btn-card1, #bal-add-btn{
+      display: none;
+    }
+
+    .month-btn {
+      background: #f3f4f6;
+      border: none;
+      color: #374151;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .month-btn:hover {
+      background: #dadadc;
+    }
+
+    .month-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Make the tbody scrollable */
+    /* Scrollable table body */
+    .expense-table-wrapper {
+      max-height: 500px;
+      /* adjust height as needed */
+      overflow-y: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    /* Keep table header fixed while scrolling */
+    .expense-table-wrapper table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .expense-table-wrapper thead {
+      position: sticky;
+      top: 0;
+      background: #f9fafb;
+      z-index: 2;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Optional: Improve scrollbar look */
+    .expense-table-wrapper::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .expense-table-wrapper::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 6px;
+    }
+
+    .expense-table-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Hidden class for display toggle */
+    .hidden{
+      display: none!important;
+    }
+    /* Making the dashboard responsive */
+    /* 400 X 900 */
+    @media screen and (max-width:480px) {
+      body {
+        font-size: 9px;
+      }
+
+      .container {
+        max-width: 100%;
+      }
+
+      /* Display Hide-Show part */
+      /* #expense-stat-card{
+        display: none;
+      } */
+
+      #nav-btn-topbar {
+        display: none;
+      }
+
+      #nav-btn-card {
+        display: flex;
+      }
+
+      .card-title {
+        display: none;
+      }
+
+      #card-desktop {
+        display: none;
+      }
+
+      #card-mobile {
+        display: block;
+      }
+      #nav-btn-card1, #bal-add-btn{
+      display: flex;
+    }
+
+      /* Topbar part */
+      .greeting {
+        width: auto;
+        font-size: 14px;
+        margin-left: 10px;
+        font-weight: 500;
+      }
+
+      .topbar-stat {
+        padding: 6px 4px;
+        font-size: 10px;
+        gap: 0px;
+      }
+
+      /* Card Header part */
+      .nav-btn {
+        gap: 8px;
+        margin: 4px 8px;
+      }
+
+      .month-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      #curr-date-card {
+       border: 1px solid var(--border);
+       box-shadow: none;
+       transform: none;
+      }
+      .arrow {
+        width: 16px;
+        height: 15px;
+
+      }
+
+      .btn {
+        padding: 8px 10px;
+        font-size: 12px;
+        /* background: #3b82f6; */
+        background: #60a5fa0d;
+        color: black;
+        border: 1px solid #60a5fa09;
+      }
+
+      /* Redesign expense card */
+      .card {
+        margin-top: 10px;
+      }
+
+      .card-header {
+        flex-wrap: wrap;
+        padding: 10px;
+        padding-right: 20px;
+      }
+
+      .expense-card {
+        display: flex;
+        flex-direction: column;
+        max-width: 480px;
+        width: 100%;
+        background: var(--card);
+        border: 1px solid #e5e7eb;
+        border-left: 6px solid #3b82f6;
+        /* accent line */
+        border-radius: 12px;
+        padding: 12px 16px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        /* transition: transform 0.15s ease, box-shadow 0.15s ease; */
+        transition: all 0.2s ease-in;
+        margin: 2px 0;
+      }
+
+      .expense-card:hover {
+        /* transform: translateY(-2px); */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .expense-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #4b5563;
+      }
+
+      .expense-amount {
+        font-weight: 600;
+        color: #16a34a;
+        font-size: 1rem;
+      }
+
+      .expense-body {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: #6b7280;
+      }
+
+      .expense-description {
+        font-size: 0.9rem;
+        color: #374151;
+        white-space: normal;
+        word-wrap: break-word;
+      }
+      /* expense card select-unselect */
+      .expense-card.selected {
+        /* background-color: #eef6ff; */
+        /* background-color: #ebefef00; */
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        transform: translateY(-1px);
+        transition: all 0.2s ease;
+        border: 0.5px solid #2563eb;;
+      }
+
+      /* Adjust card color */
+      .card {
+        background-color: var(--bg);
+        border: none;
+        border-radius: 0%;
+        box-shadow: none;
+      }
+
+      .card-header {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      /* Make expense container scrollable */
+      .expense-container {
+        max-height: 67vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+        animation: fadeIn 0.3s ease;
+      }
+
+      /* Adjust the expense form layout */
+      .modal-content {
+        width: 80%;
+        padding: 20px 40px;
+      }
+
+      .modal-content h3 {
+        font-size: 0.9rem;
+      }
+
+      .add-btn {
+      font-size: 12px;
+      padding: 8px 12px;
+    }
+      .form-row {
+      margin-bottom: 10px;
+    }
+
+    .form-row label {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .form-row input {
+      font-size: 12px;
+    }
+    .form-row input,
+    .form-row select {
+      font-size: 13px;
+    }
+
+      /* Desing the stat-tool card */
+      /* Stat Button */
+      .stat-img {
+        width: 20px;
+        height: 20px;
+        margin: 0px;
+      }
+
+      /* Balance */
+      .pill {
+      font-size: 12px;
+      padding: 0px 6px;
+      background: none;
+      border: none;
+      color: black;
+      font-weight: 650;
+    }
+
+    .amount {
+      font-size: 16px;
+        font-weight: 700;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.12);
+        padding: 1px 10px;
+        color: #2563eb;
+    }
+      #bal-stat {
+        gap: 5px;
+      }
+
+      .bal-pill {
+        font-size: 11px;
+        padding: 4px 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      #bal-amount {
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.12);
+        padding: 1px 10px;
+        color: #2563eb;
+      }
+      /* Edit Button */
+      #edit-btn{
+        padding: 4px 8px;
+  
+      }
+      /* Redesign expense stat for mobile view */
+      /* Expense stat design */
+    .expense-stats {
+      width: 100%;
+      padding: 20px 30px;
+      padding-bottom: 10px;
+      margin-top: 5px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .expense-stats h2 {
+      font-size: 16px;
+      padding-left: 5px;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .percent {
+      width: 40px;
+      font-size: 12px;
+    }
+
+
+    .total-box .amount {
+      color: #2563eb;
+      text-align: center ;
+      font-size: 16px;
+      width: fit-content;
+      padding: 1px 10px;
+    }
+
+    .total-box.total .amount {
+      color: #2563eb;
+      text-align: center;
+      font-size: 16px;
+      width: fit-content;
+      padding: 1px 10px;
+    }
+
+  }

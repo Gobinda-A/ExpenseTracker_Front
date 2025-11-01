@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Expense Tracker - Sign Up</title>
+
+</head>
+
+<body>
+  <!-- Sign Up Form -->
+  <div class="signup-container" id="signupForm" style="display: none;">
+    <h2>Sign Up</h2>
+    <div class="input-field">
+      <label for="username" required>User Name</label>
+      <input type="text" id="username" name="username">
+    </div>
+    <div class="input-field">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName">
+    </div>
+    <div class="input-field">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName">
+    </div>
+    <div class="input-field">
+      <label for="email">Email ID</label>
+      <input type="email" id="email" name="email">
+    </div>
+    <div class="input-field">
+      <label for="phone">Phone No</label>
+      <input type="tel" id="phone" name="phone">
+    </div>
+    <div class="input-field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+    </div>
+    <div class="input-field">
+      <label for="cpassword">Confirm Password</label>
+      <input type="password" id="cpassword" name="cpassword">
+    </div>
+    <div class="input-field">
+      <button class="btn" id="signupBtn">Sign Up</button>
+    </div>
+    <div class="input-field">
+      <p class="signin-text">
+      Already a user?
+      <button id="signinBtn" class="btn-small">Sign In</button>
+    </p>
+    </div>
+  </div>
+
+
+  <!-- sign-in form -->
+  <div class="signup-container" id="loginForm">
+    <h2>Sign In</h2>
+    <div class="input-field">
+      <label for="email">Email ID</label>
+      <input type="email" id="loginEmail" name="email">
+    </div>
+    <div class="input-field">
+      <label for="password">Password</label>
+      <input type="password" id="loginPass" name="password">
+    </div>
+    <div class="input-field">
+      <button class="btn" id="loginBtn">Log In</button>
+    </div>
+    <div class="input-field">
+      <p class="signup-text">
+      Don't have an account?
+      <button id="backToSignup" class="btn-small">Sign Up</button>
+    </p>
+    </div>
+  </div>
+  <script type="module" src="./js/app/main.js"></script>
+</body>
+
+</html>
