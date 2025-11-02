@@ -1,7 +1,6 @@
-const expenseStatRow=document.querySelector("#expense-stat-card .stat-row");
-const stats=expenseStatRow.querySelectorAll(".stat");
-
 export async function updateExpenseStat(currentMonthExpenses, totalMonthlyExpense) {
+  const expenseStatRow=document.querySelector("#expense-stat-card .stat-row");
+  const stats=expenseStatRow.querySelectorAll(".stat");
   // Initialize category totals
   const expCategory = { 
     Food: 0, Grocery: 0, Transport: 0, Electricity: 0,
