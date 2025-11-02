@@ -1,7 +1,8 @@
-import { addBalance, getCurrUser} from "../api/userApi.js";
+import { addBalance } from "../api/userApi.js";
 import { loadExpenses, saveExpense } from "../app/dashboardExpense.js";
-import { formatDateTime, getCurrMonthYr, updateTopBarDate} from "../utils/dateTime.js";
-import { getProfile,setProfile } from "./profileDom.js";
+import { formatDateTime, getCurrMonthYr, updateTopBarDate } from "../utils/dateTime.js";
+import { updateExpenseStat } from "./expenseStatDom.js";
+import { getProfile, setProfile } from "./profileDom.js";
 const expenseTable = document.querySelector("table tbody");
 const expenseContainer = document.getElementById("card-mobile"); // Mobile container div
 
@@ -9,15 +10,19 @@ export async function reloadExpenseRows() {
   const user = getProfile();
   const expenses = await loadExpenses(user.emailID); // Load all expenses from DB
   expenseTable.innerHTML = ""; // Clear existing rows
+  expenseContainer.innerHTML="";
 
   let totalExpense = 0;
   let totalMonthlyExpense = 0;
 
+ //Array to store current month expenses
+  const currentMonthExpenses = [];
+
   // Get current month and year
-  const { currentDay, currentMonth, currentYear } = await getCurrMonthYr();
+  const { currentDay, currentMonth, currentYear } = getCurrMonthYr();
   await updateTopBarDate(currentDay, currentMonth, currentYear);
 
-  expenses.forEach((exp) => {
+  expenses.forEach(async (exp) => {
     //update total expense
     totalExpense += parseInt(exp.amount);
 
@@ -30,39 +35,37 @@ export async function reloadExpenseRows() {
 
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
-    <td>${exp.date}</td>
-    <td>${exp.day}</td>
-    <td>${exp.time}</td>
-    <td><span class="chip"><span class="dot"></span>${exp.category}</span></td>
-    <td>${exp.location}</td>
-    <td>${exp.description}</td>
-    <td class="td-amount">₹${exp.amount}</td>
-  `;
+      <td>${exp.date}</td>
+      <td>${exp.day}</td>
+      <td>${exp.time}</td>
+      <td><span class="chip"><span class="dot"></span>${exp.category}</span></td>
+      <td>${exp.location}</td>
+      <td>${exp.description}</td>
+      <td class="td-amount">₹${exp.amount}</td>`;
+
       expenseTable.appendChild(newRow);
+
+      // Update Mobile Expese Cards:
+      await updateMobileExpenseCards(exp);
+
+      // Store current month expenses
+      currentMonthExpenses.push(exp);
+
     }
   });
 
   await updateExpenses(totalExpense, totalMonthlyExpense);
-  await reloadExpenseRowsMobile(expenses); // Also reload mobile view
+
+  // Update Expese Stat:
+  await updateExpenseStat(currentMonthExpenses,totalMonthlyExpense);
 }
 
-export async function reloadExpenseRowsMobile(expenses) {
-  if (!expenseContainer) return; // safety check
+async function updateMobileExpenseCards(exp) {
 
-  expenseContainer.innerHTML = "";
+  const expenseCard = document.createElement("div");
+  expenseCard.classList.add("expense-card");
 
-  const { currentMonth, currentYear } = await getCurrMonthYr();
-
-  expenses.forEach((exp) => {
-    const expenseDate = new Date(exp.date);
-    const expenseMonth = expenseDate.getMonth();
-    const expenseYear = expenseDate.getFullYear();
-
-    if (expenseMonth === currentMonth && expenseYear === currentYear) {
-      const expenseCard = document.createElement("div");
-      expenseCard.classList.add("expense-card");
-
-      expenseCard.innerHTML = `
+  expenseCard.innerHTML = `
         <div class="expense-header">
           <span class="expense-date">${exp.date} (${exp.day}) • ${exp.time}</span>
           <span class="expense-amount">₹${exp.amount}</span>
@@ -74,17 +77,11 @@ export async function reloadExpenseRowsMobile(expenses) {
         <div class="expense-description">${exp.description}</div>
       `;
 
-      expenseContainer.appendChild(expenseCard);
-    }
-  });
+  expenseContainer.appendChild(expenseCard);
 }
-export async function renderExpenseRow({
-  category,
-  location,
-  description,
-  amount,
-}) {
-  const { date, day, time, time2 } = formatDateTime(new Date()); //get current date and time
+
+export async function renderExpenseRow({ category, location, description, amount, }) {
+  const { date, day, time } = formatDateTime(new Date()); //get current date and time
 
   const user = getProfile();
   await saveExpense({
@@ -99,25 +96,6 @@ export async function renderExpenseRow({
   }); // Save Expense to DB
   await updateBalance(amount); //Deduct the balance
   await reloadExpenseRows(); // Reload all expenses to reflect the new addition
-}
-
-export async function renderBalance({ amount }) { 
-  const user = getProfile();
-  const newBalance= (Number(user.balance)||0)+(Number(amount)||0);
-  const updatedUser=await addBalance({emailID:user.emailID, balance:newBalance});
-  setProfile(updatedUser);
-  await reloadBalance();
-}
-async function updateBalance(amount) {
-  const user = getProfile();
-  const newBalance= (Number(user.balance)||0)-(Number(amount)||0);
-  const updatedUser=await addBalance({emailID:user.emailID, balance:newBalance});
-  setProfile(updatedUser);
-  await reloadBalance();
-}
-export async function reloadBalance() {
-  const user = getProfile();
-  document.getElementById("bal-amount").textContent=`₹${user.balance}`;
 }
 
 async function updateExpenses(totalExpense, totalMonthlyExpense) {
@@ -164,4 +142,25 @@ export async function initExpenseCardSelection() {
       cards.forEach((c) => c.classList.remove("selected"));
     }
   });
+}
+
+// Balance logic here
+
+export async function renderBalance({ amount }) {
+  const user = getProfile();
+  const newBalance = (Number(user.balance) || 0) + (Number(amount) || 0);
+  const updatedUser = await addBalance({ emailID: user.emailID, balance: newBalance });
+  setProfile(updatedUser);
+  await reloadBalance();
+}
+async function updateBalance(amount) {
+  const user = getProfile();
+  const newBalance = (Number(user.balance) || 0) - (Number(amount) || 0);
+  const updatedUser = await addBalance({ emailID: user.emailID, balance: newBalance });
+  setProfile(updatedUser);
+  await reloadBalance();
+}
+export async function reloadBalance() {
+  const user = getProfile();
+  document.getElementById("bal-amount").textContent = `₹${user.balance}`;
 }

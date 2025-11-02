@@ -21,7 +21,7 @@ export function formatDateTime(dateObj) {
   return { date, day, time, time2 };
 }
 
-export async function getCurrMonthYr() {
+export function getCurrMonthYr() {
     const currentDay=currentDate.getDate();
     const currentMonth = currentDate.getMonth(); // 0-based (0 = Jan)
     const currentYear = currentDate.getFullYear();
@@ -34,6 +34,16 @@ export async function updateTopBarDate(currentDay,currentMonth,currentYear){
   const currDate=currentDay+"/"+monthStr+"/"+currentYear;
   document.getElementById("curr-date-card").innerText=currDate;
   document.getElementById("curr-date-top").innerText=currDate;
+  updateMonthText(currentMonth);
+}
+
+function updateMonthText(currentMonth){
+  const monthArr=["January","February","March","April","May","June","July",
+  "August","September","October","November","December"];
+  const monthText=monthArr[currentMonth];
+  document.querySelector("#expense-stat-card .total-box h3").textContent=`${monthText} Expenses`;
+  document.querySelector(".topbar-stat .pill").textContent=monthText;
+
 }
 
 export async function decreaseMonth(){

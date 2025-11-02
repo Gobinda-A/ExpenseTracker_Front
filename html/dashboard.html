@@ -48,6 +48,7 @@
               <span class="bal-pill" id="bal-pill">Balance</span>
               <span class="amount" id="bal-amount">₹100</span>
             </div>
+            <button class="month-btn" onclick="location.reload()"><img class="stat-img" src="../images/home.png"></button>
           </div>
           <button class="month-btn" id="bal-add-btn">+ Add Bal</button>
           <div class="card-title">Recent Expenses</div>
@@ -82,8 +83,8 @@
         </div>
 
         <div class="expense-container" id="card-mobile">
-          <div class="expense-card">
-            <!-- <div class="expense-header">
+          <!-- <div class="expense-card">
+            <div class="expense-header">
               <span class="expense-date">Oct 21, 2025 (Tue) • 08:35 PM</span>
               <span class="expense-amount">₹1,250</span>
             </div>
@@ -93,8 +94,8 @@
             </div>
             <div class="expense-description">
               Dinner at Empire restaurant with friends
-            </div> -->
-          </div>
+            </div>
+          </div> -->
         </div>
       </div>
 
@@ -112,85 +113,102 @@
           <div class="amount" id="stat-tot-amt">₹3000</div>
         </div>
       </div>
-
-      <div class="stat">
-        <span class="label">Food</span>
-        <div class="bar">
-          <div class="fill" style="width: 40%; background-color: #9be564;"></div>
+      <div class="stat-row">
+        <div class="stat hidden">
+          <span class="label">Food</span>
+          <div class="bar">
+            <div class="fill" style="width: 40%; background-color: #9be564;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">40%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Rent</span>
-        <div class="bar">
-          <div class="fill" style="width: 20%; background-color: #64b5f6;"></div>
+        <div class="stat hidden">
+          <span class="label">Grocery</span>
+          <div class="bar">
+            <div class="fill" style="width: 15%; background-color: #4ade80;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">20%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Travel</span>
-        <div class="bar">
-          <div class="fill" style="width: 10%; background-color: #ffb74d;"></div>
+        <div class="stat hidden">
+          <span class="label">Transport</span>
+          <div class="bar">
+            <div class="fill" style="width: 10%; background-color: #ffb74d;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">10%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Grocery</span>
-        <div class="bar">
-          <div class="fill" style="width: 15%; background-color: #4ade80;"></div>
+        <div class="stat hidden">
+          <span class="label">Electricity</span>
+          <div class="bar">
+            <div class="fill" style="width: 12%; background-color: #15f2fa;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">15%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Medical</span>
-        <div class="bar">
-          <div class="fill" style="width: 8%; background-color: #f87171;"></div>
+        <div class="stat hidden">
+          <span class="label">Medical</span>
+          <div class="bar">
+            <div class="fill" style="width: 8%; background-color: #f87171;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">8%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Electricity</span>
-        <div class="bar">
-          <div class="fill" style="width: 12%; background-color: #15f2fa;"></div>
+        <div class="stat hidden">
+          <span class="label">Rent</span>
+          <div class="bar">
+            <div class="fill" style="width: 20%; background-color: #64b5f6;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">12%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">EMI</span>
-        <div class="bar">
-          <div class="fill" style="width: 24%; background-color: #f615fae6;"></div>
+        <div class="stat hidden">
+          <span class="label">Recharge</span>
+          <div class="bar">
+            <div class="fill" style="width: 20%; background-color: #b9f825fc;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">24%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Family</span>
-        <div class="bar">
-          <div class="fill" style="width: 40%; background-color: #d8fa15;"></div>
+        <div class="stat hidden">
+          <span class="label">EMI</span>
+          <div class="bar">
+            <div class="fill" style="width: 24%; background-color: #f615fae6;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">40%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Dependant</span>
-        <div class="bar">
-          <div class="fill" style="width: 15%; background-color: #cc34fbc9;"></div>
+        <div class="stat hidden">
+          <span class="label">Family</span>
+          <div class="bar">
+            <div class="fill" style="width: 40%; background-color: #d8fa15;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">15%</span>
-      </div>
 
-      <div class="stat">
-        <span class="label">Others</span>
-        <div class="bar">
-          <div class="fill" style="width: 10%; background-color: #f643d2;"></div>
+        <div class="stat hidden">
+          <span class="label">Dependant</span>
+          <div class="bar">
+            <div class="fill" style="width: 15%; background-color: #cc34fbc9;"></div>
+          </div>
+          <span class="percent"></span>
         </div>
-        <span class="percent">10%</span>
+
+        <div class="stat hidden">
+          <span class="label">Shopping</span>
+          <div class="bar">
+            <div class="fill" style="width: 15%; background-color: #ec9d43;"></div>
+          </div>
+          <span class="percent"></span>
+        </div>
+
+        <div class="stat hidden">
+          <span class="label">Others</span>
+          <div class="bar">
+            <div class="fill" style="width: 10%; background-color: #f643d2;"></div>
+          </div>
+          <span class="percent"></span>
+        </div>
       </div>
     </div>
     <!-- Balance Modal -->
@@ -212,7 +230,7 @@
   <!-- Expense Input Container -->
   <!-- Expense Modal -->
 
-  <div id="expenseModal" class="modal" >
+  <div id="expenseModal" class="modal">
     <div class="modal-content">
       <div class="close-btn" id="closeModal"><img src="../images/close-button.png"></div>
       <h3>Add New Expense</h3>
@@ -222,13 +240,17 @@
             <label>Category</label>
             <select id="category" name="category" required>
               <option value="" disabled selected>Select a category</option>
-              <option value="Grocery">Grocery</option>
-              <option value="Rent">Rent</option>
-              <option value="Electricity">Electricity</option>
               <option value="Food" selected>Food</option>
-              <option value="Medical">Medical</option>
+              <option value="Grocery">Grocery</option>
               <option value="Transport">Transport</option>
-              <option value="Entertainment">Entertainment</option>
+              <option value="Electricity">Electricity</option>
+              <option value="Medical">Medical</option>
+              <option value="Rent">Rent</option>
+              <option value="Recharge">Recharge</option>
+              <option value="EMI">EMI</option>
+              <option value="Family">Family</option>
+              <option value="Dependant">Dependant</option>
+              <option value="Shopping">Shopping</option>
               <option value="Others">Others</option>
             </select>
           </div>
@@ -250,7 +272,7 @@
   </div>
   <script type="module" src="../js/config/config.js"></script>
   <script type="module" src="../js/app/main.js"></script>
-  
+
 </body>
 
 </html>
