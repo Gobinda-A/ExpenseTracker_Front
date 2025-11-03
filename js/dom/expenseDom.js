@@ -1,5 +1,6 @@
+import { saveUpdatedExpense } from "../api/expenseApi.js";
 import { addBalance } from "../api/userApi.js";
-import { loadExpenses, saveExpense } from "../app/dashboardExpense.js";
+import { loadExpenses, saveExpense} from "../app/dashboardExpense.js";
 import { formatDateTime, getCurrMonthYr, updateTopBarDate } from "../utils/dateTime.js";
 import { updateExpenseStat } from "./expenseStatDom.js";
 import { getProfile, setProfile } from "./profileDom.js";
@@ -63,8 +64,7 @@ export async function reloadExpenseRows() {
 async function updateMobileExpenseCards(exp) {
 
   const expenseCard = document.createElement("div");
-  expenseCard.classList.add("expense-card");
-
+  expenseCard.classList.add("expense-card");  
   expenseCard.innerHTML = `
         <div class="expense-header">
           <span class="expense-date">${exp.date} (${exp.day}) • ${exp.time}</span>
@@ -75,12 +75,13 @@ async function updateMobileExpenseCards(exp) {
           <span class="expense-category">${exp.category}</span>
         </div>
         <div class="expense-description">${exp.description}</div>
+        <span id="card-expense-id" class="hidden">${exp.id}</span>
       `;
 
   expenseContainer.appendChild(expenseCard);
 }
 
-export async function renderExpenseRow({ category, location, description, amount, }) {
+export async function renderExpenseRow({ category, location, description, amount}) {
   const { date, day, time } = formatDateTime(new Date()); //get current date and time
 
   const user = getProfile();
@@ -94,7 +95,20 @@ export async function renderExpenseRow({ category, location, description, amount
     description,
     amount,
   }); // Save Expense to DB
-  await updateBalance(amount); //Deduct the balance
+  await deductFromBalance(amount); //Deduct the balance
+  await reloadExpenseRows(); // Reload all expenses to reflect the new addition
+}
+
+export async function updateExpenseRow({ category, location, description, amount,id,amount2 }) {
+  await renderBalance({amount:amount2});
+  await saveUpdatedExpense({
+    id,
+    category,
+    location,
+    description,
+    amount,
+  }); // Save Expense to DB
+  await deductFromBalance(amount); //Deduct the balance
   await reloadExpenseRows(); // Reload all expenses to reflect the new addition
 }
 
@@ -118,28 +132,31 @@ export async function toogleDashboardStats() {
 }
 
 export async function initExpenseCardSelection() {
-  const cards = document.querySelectorAll(".expense-card");
+const expenseContainer = document.getElementById("card-mobile");
 
   document.addEventListener("click", (e) => {
     const clickedCard = e.target.closest(".expense-card");
     const isEditBtn = e.target.closest("#edit-btn");
 
-    // 🟢 Case 1: Clicked on an expense card
-    if (clickedCard) {
-      // If it's already selected, deselect it (toggle off)
+    // 🟢 Case 1: Clicked on a card
+    if (clickedCard && expenseContainer.contains(clickedCard)) {
+      // Toggle selection
       if (clickedCard.classList.contains("selected")) {
         clickedCard.classList.remove("selected");
       } else {
-        // Otherwise, clear other selections and select this one
-        cards.forEach((c) => c.classList.remove("selected"));
+        expenseContainer
+          .querySelectorAll(".expense-card.selected")
+          .forEach((c) => c.classList.remove("selected"));
         clickedCard.classList.add("selected");
       }
-      return; // ✅ Stop further checks
+      return;
     }
 
-    // 🟡 Case 2: Clicked somewhere else but not on Edit button
+    // 🟡 Case 2: Clicked outside cards and not on edit button
     if (!isEditBtn) {
-      cards.forEach((c) => c.classList.remove("selected"));
+      expenseContainer
+        .querySelectorAll(".expense-card.selected")
+        .forEach((c) => c.classList.remove("selected"));
     }
   });
 }
@@ -153,7 +170,7 @@ export async function renderBalance({ amount }) {
   setProfile(updatedUser);
   await reloadBalance();
 }
-async function updateBalance(amount) {
+export async function deductFromBalance(amount) {
   const user = getProfile();
   const newBalance = (Number(user.balance) || 0) - (Number(amount) || 0);
   const updatedUser = await addBalance({ emailID: user.emailID, balance: newBalance });

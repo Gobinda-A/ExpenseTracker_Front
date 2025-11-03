@@ -1,5 +1,5 @@
 import { createExpense, getExpenses} from "../api/expenseApi.js";
-import { renderExpenseRow,renderBalance} from "../dom/expenseDom.js";
+import { renderExpenseRow,renderBalance, updateExpenseRow} from "../dom/expenseDom.js";
 import { closeBalModal, closeExpenseModal } from "../dom/modalDom.js";
 import { validateBalanceData, validateExpenseData } from "../utils/validation.js";
 const expenseForm = document.getElementById("expenseForm");
@@ -46,6 +46,19 @@ export async function addExpense(){
     try{
     await validateExpenseData(data);
     renderExpenseRow(data);
+    expenseForm.reset();
+    closeExpenseModal();
+  }
+  catch(err){
+    alert(err);
+  }
+}
+
+export async function updateExpense() {
+    const data = Object.fromEntries(new FormData(expenseForm));
+    try{
+    await validateExpenseData(data);
+    await updateExpenseRow(data);
     expenseForm.reset();
     closeExpenseModal();
   }

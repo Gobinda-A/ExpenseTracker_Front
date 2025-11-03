@@ -1,14 +1,14 @@
 import { openExpenseModal, closeExpenseModal,openBalModal,closeBalModal,openExpenseUpdateModal } from "../dom/modalDom.js";
 import {loadCurrentUser, logOutUser} from "./dashboardUser.js"
 import {initProfileDropdown} from "../dom/profileDom.js"
-import { addExpense,addBalance } from "../app/dashboardExpense.js";
+import { addExpense,addBalance, updateExpense } from "../app/dashboardExpense.js";
 import { reloadExpenseRows,toogleDashboardStats,initExpenseCardSelection,reloadBalance } from "../dom/expenseDom.js";
 import { decreaseMonth, increaseMonth } from "../utils/dateTime.js";
 
 export async function initDashboard() {
   await loadCurrentUser();  //load curr user
-  await reloadExpenseRows(); //load expenses
   await initExpenseCardSelection();
+  await reloadExpenseRows(); //load expenses
   await reloadBalance(); //relaod Balance
   initProfileDropdown(); //init profile dropdown
   
@@ -39,4 +39,6 @@ export async function initDashboard() {
   document.getElementById("expense-add-submit").addEventListener("click",addExpense);
 
   document.getElementById("edit-btn").addEventListener("click",openExpenseUpdateModal);
+
+  document.getElementById("expense-update-submit").addEventListener("click",updateExpense);
 }

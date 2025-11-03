@@ -83,7 +83,7 @@
         </div>
 
         <div class="expense-container" id="card-mobile">
-          <!-- <div class="expense-card">
+          <div class="expense-card">
             <div class="expense-header">
               <span class="expense-date">Oct 21, 2025 (Tue) • 08:35 PM</span>
               <span class="expense-amount">₹1,250</span>
@@ -95,7 +95,8 @@
             <div class="expense-description">
               Dinner at Empire restaurant with friends
             </div>
-          </div> -->
+            <span id="card-expense-id" class="hidden">10</span>
+          </div>
         </div>
       </div>
 
@@ -266,7 +267,10 @@
             <label>Amount</label>
             <input type="number" id="amount" placeholder="₹0" name="amount" required>
           </div>
+          <input type="number" class="hidden" name="amount2" id="amount2" value="0">
+          <input type="number" class="hidden" name="id" id="form-expense-id">
           <button type="button" class="add-btn" id="expense-add-submit">+ Add Expense</button>
+          <button type="button" class="add-btn hidden" id="expense-update-submit">+ Update Expense</button>
       </form>
     </div>
   </div>

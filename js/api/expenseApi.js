@@ -22,3 +22,15 @@ if (!response.ok)
     throw new Error("Failed to get Expenses");  
 return response.json();
 }
+
+export async function saveUpdatedExpense(data){
+const response = await fetch(`${BASE_URL}/expense/update`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include", // ✅ Important: send cookies        
+    body: JSON.stringify(data)
+});
+if (!response.ok) 
+    throw new Error("Failed to Update Expense");  
+return response.json();
+}
