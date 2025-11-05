@@ -5,6 +5,7 @@ const expenseUpdateBtn=document.getElementById("expense-update-submit");
 
 export function openExpenseModal() {
   expenseModal.style.display = "flex";
+  document.querySelector("#expenseModal h3").textContent="Add New Expense";
 }
 
 export function closeExpenseModal() {
@@ -30,6 +31,8 @@ export function openExpenseUpdateModal() {
   const card = document.querySelector(".expense-card.selected");
   if(!card) return;
   expenseModal.style.display = "flex";
+
+  document.querySelector("#expenseModal h3").textContent="Update Expense";
 
   // Toggle Update-Add button
   expenseAddBtn.classList.add("hidden");
